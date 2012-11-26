@@ -1,0 +1,60 @@
+% layout 'default';
+% title 'Proxy Manager';
+<div class="row">
+	<div class="span12">
+	<h2><a href="/" style="color:#000;">Proxy Manager</a></h2>
+		<form class="form-inline well">
+			<input type="text" placeholder="IP address" name="ip" />
+			<input type="text" placeholder="Port #" name="port" />
+			<select name="country">
+				<option value="gb">United Kingdom</option>
+				<option value="us">USA</option>
+				<option value="" disabled>------</option>
+				<option value="cn">China</option>
+				<option value="fr">France</option>
+				<option value="de">Germany</option>
+				<option value="it">Italy</option>
+			</select>
+			<button class="btn btn-primary">Add Proxy &raquo;</button>
+		</form>
+	</div>
+</div>
+<div class="row">
+	<div class="span12">
+		<form method="get" action="/" class="form-inline pull-right">
+		<select name="cc">
+			<option value="gb"<% if ($reqcc eq 'gb') {%> selected="selected"<% } %>>United Kingdom</option>
+			<option value="us"<% if ($reqcc eq 'us') {%> selected="selected"<% } %>>USA</option>
+			<option value="" disabled>------</option>
+			<option value="cn"<% if ($reqcc eq 'cn') {%> selected="selected"<% } %>>China</option>
+			<option value="fr"<% if ($reqcc eq 'fr') {%> selected="selected"<% } %>>France</option>
+			<option value="de"<% if ($reqcc eq 'de') {%> selected="selected"<% } %>>Germany</option>
+			<option value="it"<% if ($reqcc eq 'it') {%> selected="selected"<% } %>>Italy</option>
+		</select>
+		<button type="submit" class="btn btn-primary">Filter</button>
+		</form>
+		<table class="table table-striped table-bordered">
+		<thead>
+			<tr>
+				<th>IP</th>
+				<th>Port</th>
+				<th>Country</th>
+				<th>Added</th>
+				<th>Last Checked</th>
+				<th>Status</th>
+			</tr>
+		</thead>
+		<tbody>
+			% foreach my $prox (@{$proxies}) {
+				<tr>
+					<td><%= $prox->{'ip'} %></td>
+					<td><%= $prox->{'port'} %></td>
+					<td><%= $prox->{'country'} %></td>
+					<td><%= $prox->{'added'}->ymd %></td>
+					<td><%= $prox->{'last_checked'} %></td>
+					<td<% if ($prox->{'status'} eq 'live') { %> style="color:green;font-weight:bold;"<% } %>><%= $prox->{'status'} %></td>
+			% }
+		</tbody>
+		</table>
+	</div>
+</div>

@@ -1,0 +1,33 @@
+Proxy Manager
+
+Mojolicious based proxy manager, with proxy checker function.
+
+Allows you to keep track of a list of geo-sensitive proxies for use
+in SEO rank tracking, PPC analysis and other proxy uses.
+
+Install
+-------
+Prerequisites are:
+
+* Mojolicious
+* Modern::Perl
+* WWW::ProxyChecker
+* MongoDB
+
+Simply run the main Mojolicious app in Morbo/Hypnotoad and set the 
+proxy checker to run via crontab on an hourly (for example) basis to
+check the proxies are still live.
+
+Obviously you'll need a running MongoDB process and a DB with proxies in 
+it. The following MongoDB structure will work with this app:
+
+	{
+	  "_id": { "$oid" : "50AB7C4963EACAD554000000" },
+	  "country": "United Arab Emirates",
+	  "ccode": "ae",
+	  "status": "new",
+	  "ip": "1.2.3.4",
+	  "added": 1353415753,
+	  "port": "8080"
+	}
+
